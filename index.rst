@@ -15,7 +15,7 @@ but modified to be more pythonic.
 * :ref:`Migrations`
 * Support for **PostgreSQL**, **MySQL** and **SQLite** out of the box
 
-THe Orator ORM supports python versions **2.7+** and **3.2+**
+The Orator ORM supports python versions **2.7+** and **3.2+**
 
 .. toctree::
     :hidden:
