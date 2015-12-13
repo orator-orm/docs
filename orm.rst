@@ -802,6 +802,23 @@ The ``Tag`` model can define a method for each of its relationships:
         def videos(self):
             return Video
 
+.. note::
+
+    If you want to apply permanent query conditions on your relationships
+    you can do so by returning a ``Builder`` instance instead of a ``Model``
+    subclass.
+
+    For example, let's say you want all comments of a user to be ordered by
+    date of creation in descending order:
+
+    .. code-block:: python
+
+        class User(Model):
+
+            @has_many
+            def comments(self):
+                return Comment.order_by('created_at', 'desc')
+
 
 Querying relations
 ==================
@@ -998,8 +1015,7 @@ Here's an example:
 
 In this example, we're eager loading the user's posts only if the post's title contains the word "first".
 
-When passing a query as a constraint, only the where clause is supported, if you want to be more specific
-you can use a callback:
+You can also use a callback:
 
 .. code-block:: python
 
