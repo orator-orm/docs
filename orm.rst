@@ -1262,6 +1262,17 @@ these columns, just add the ``__timestamps__`` property:
         __timestamps__ = False
 
 
+.. versionchanged:: 0.8.0
+
+    Orator supports maintaining only one ``timestamp`` column, like so:
+
+    .. code-block:: python
+
+        class User(Model):
+
+            __timestamps__ = ['created_at']
+
+
 Providing a custom timestamp format
 -----------------------------------
 

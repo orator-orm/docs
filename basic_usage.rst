@@ -43,6 +43,11 @@ If you have multiple databases configured you can specify which one is the defau
         }
     }
 
+.. versionchanged:: 0.8.0
+
+    For ``MySQL`` and ``PostgreSQL``, the connectors are configured to return ``unicode`` strings.
+    If you want to use the previous behavior just set the ``use_unicode`` configuration option to ``False``.
+
 .. _read_write_connections:
 
 Read / Write connections

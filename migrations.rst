@@ -3,6 +3,11 @@
 Migrations
 ##########
 
+.. versionchanged:: 0.8.0
+
+    The command names have been changed
+
+
 Migrations are a type of version control for your database.
 They allow a team to modify the database schema and stay up to date on the current schema state.
 Migrations are typically paired with the :ref:`SchemaBuilder` to easily manage your database's schema.
@@ -44,14 +49,19 @@ Migrations are typically paired with the :ref:`SchemaBuilder` to easily manage y
         }
 
 
+.. note::
+
+    Every migrations command accepts a ``--database/-d`` option to specify the database.
+
+
 Creating Migrations
 ===================
 
-To create a migration, you can use the ``migrations:make`` command on the Orator CLI:
+To create a migration, you can use the ``make:migration`` command on the Orator CLI:
 
 .. code-block:: bash
 
-    orator migrations:make create_users_table
+    orator make:migration create_users_table
 
 This will create a migration file that looks like this:
 
@@ -82,16 +92,16 @@ If you want the migrations to be stored in another folder, use the ``--path/-p``
 
 .. code-block:: bash
 
-    orator migrations:make create_users_table -p my/path/to/migrations
+    orator make:migration create_users_table -p my/path/to/migrations
 
 The ``--table`` and ``--create`` options can also be used to indicate the name of the table,
 and whether the migration will be creating a new table:
 
 .. code-block:: bash
 
-    orator migrations:make add_votes_to_users_table --table=users
+    orator make:migration add_votes_to_users_table --table=users
 
-    orator migrations:make create_users_table --table=users --create
+    orator make:migration create_users_table --table=users --create
 
 These commands would respectively create the following migrations:
 
@@ -147,11 +157,11 @@ These commands would respectively create the following migrations:
 Running Migrations
 ==================
 
-To run all outstanding migrations, just use the ``migrations:run`` command:
+To run all outstanding migrations, just use the ``migrate`` command:
 
 .. code-block:: bash
 
-    orator migrations:run -c databases.py
+    orator migrate
 
 .. note::
 
@@ -190,24 +200,24 @@ Rollback the last migration operation
 
 .. code-block:: bash
 
-    orator migrations:rollback
+    orator migrate:rollback
 
 Rollback all migrations
 -----------------------
 
 .. code-block:: bash
 
-    orator migrations:reset
+    orator migrate:reset
 
 
 Getting migrations status
 =========================
 
-To see the status of the migrations, just use the ``migrations:status`` command:
+To see the status of the migrations, just use the ``migrate:status`` command:
 
 .. code-block:: bash
 
-    orator migrations:status
+    orator migrate:status
 
 This would output something like this:
 
