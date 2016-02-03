@@ -343,7 +343,7 @@ To enable soft deletes for a model, make it inherit from the ``SoftDeletes`` mix
     from orator import Model, SoftDeletes
 
 
-    class User(Model, SoftDeletes):
+    class User(SoftDeletes, Model):
 
         __dates__ = ['deleted_at']
 
@@ -823,7 +823,7 @@ The ``Tag`` model can define a method for each of its relationships:
 Querying relations
 ==================
 
-Querying relations when selection
+Querying relations when selecting
 ---------------------------------
 
 When accessing the records for a model, you may wish to limit the results based on the exeistence

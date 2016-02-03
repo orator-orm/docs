@@ -404,8 +404,8 @@ The ``forget`` method removes an item from the collection by its key:
 
 .. _for_page:
 
-``for_page``
-------------
+``for_page()``
+--------------
 
 The ``for_page`` method returns a new collection containing
 the items that would be present on a given page number:
@@ -847,8 +847,8 @@ The ``reverse`` method reverses the order of the collection's items:
 
 .. _serialize:
 
-``serialize``
--------------
+``serialize()``
+---------------
 
 The ``serialize`` method converts the collection into a ``dict`` or a ``list``.
 If the collection's values are :ref:`ORM` models, the models will also be converted to dictionaries:
@@ -866,6 +866,11 @@ If the collection's values are :ref:`ORM` models, the models will also be conver
     collection.serialize()
 
     # [{'id': 1, 'name': 'John'}]
+
+.. warning::
+
+    ``serialize`` also converts all of its nested objects.
+    If you want to get the underlying items as is, use the all_ method instead.
 
 
 .. _shift:
@@ -973,11 +978,6 @@ You can also pass a negative integer to take the specified amount of items from 
     chunk.all()
 
     # [4, 5]
-
-.. warning::
-
-    ``serialize`` also converts all of its nested objects.
-    If you want to get the underlying items as is, use the all_ method instead.
 
 
 .. _to_json:
