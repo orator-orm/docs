@@ -1294,16 +1294,21 @@ Defining a query scope
 ----------------------
 
 Scopes allow you to easily re-use query logic in your models.
-To define a scope, simply prefix a model method with ``scope``:
+To define a scope, simply use the ``scope`` decorator:
 
 .. code-block:: python
 
+    from orator.orm import scope
+
+
     class User(Model):
 
-        def scope_popular(self, query):
+        @scope
+        def popular(self, query):
             return query.where('votes', '>', 100)
 
-        def scope_women(self, query):
+        @scope
+        def women(self, query):
             return query.where_gender('W')
 
 Using a query scope
@@ -1323,7 +1328,8 @@ Just add your parameters to your scope function:
 
     class User(Model):
 
-        def scope_of_type(self, query, type):
+        @scope
+        def of_type(self, query, type):
             return query.where_type(type)
 
 Then pass the parameter into the scope call:
