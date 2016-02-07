@@ -75,6 +75,22 @@ Note that you will need to place ``updated_at`` and ``created_at`` columns on yo
 If you do not wish to have these columns automatically maintained,
 set the ``__timestamps__`` property on your model to ``False``.
 
+.. note::
+
+    You can also create a model class with the ``make:model`` command:
+
+    .. code-block:: bash
+
+        orator make:model User
+
+    will create a ``user.py`` file in the ``models`` directory (the path can be overidden with the ``-p/--path`` option).
+
+    You can also tell Orator to create a migration file with the ``-m/--migration`` option:
+
+    .. code-block:: bash
+
+        orator make:model User -m
+
 
 Retrieving all models
 ---------------------
