@@ -1699,7 +1699,7 @@ Note that entire collections of models can also be converted to dictionaries:
 Converting a model to JSON
 --------------------------
 
-To convert a model to JSON, you can use the ``to_json`` method!
+To convert a model to JSON, you can use the ``to_json`` method:
 
 .. code-block:: python
 
