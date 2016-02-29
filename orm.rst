@@ -1502,7 +1502,7 @@ Mutators are declared in a similar fashion:
 
         @mutator
         def first_name(self, value):
-            self.set_raw_attribute(value.lower())
+            self.set_raw_attribute('first_name', value.lower())
 
 
 .. note::
@@ -1524,7 +1524,7 @@ Mutators are declared in a similar fashion:
 
             @first_name.mutator
             def set_first_name(self, value):
-                self.set_raw_attribute(value.lower())
+                self.set_raw_attribute('first_name', value.lower())
 
     The inverse is also possible:
 
@@ -1537,7 +1537,7 @@ Mutators are declared in a similar fashion:
 
             @mutator
             def first_name(self, value):
-                self.set_raw_attribute(value.lower())
+                self.set_raw_attribute('first_name', value.lower())
 
             @first_name.accessor
             def get_first_name(self):
