@@ -236,6 +236,15 @@ Command                                                   Description
 :python:`table.index('state')`                            Adds a basic index
 ========================================================  =================================================
 
+.. note::
+
+``MySQL`` and ``PostgreSQL`` have limitations regarding indexes length.
+So, if the names of your columns are too long you can pass the ``name`` keyword argument to specify your
+own index name:
+
+.. code-block:: python
+
+    table.index(['field_with_really_long_name', 'another_field_with_long_name'], name='my_uniq_idx')
 
 Dropping indexes
 ================
