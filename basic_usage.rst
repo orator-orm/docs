@@ -92,6 +92,11 @@ Running queries
 
 Once you have configured your database connection, you can run queries.
 
+.. warning::
+
+    The following examples use the ``qmark`` syntax for parameter binding. You must adapt it
+    to the syntax of your backend package.
+
 
 Running a select query
 ~~~~~~~~~~~~~~~~~~~~~~
