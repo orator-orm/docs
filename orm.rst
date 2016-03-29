@@ -20,7 +20,7 @@ Before getting started, be sure to have configured a ``DatabaseManager`` as seen
             'driver': 'mysql',
             'host': 'localhost',
             'database': 'database',
-            'username': 'root',
+            'user': 'root',
             'password': '',
             'prefix': ''
         }
