@@ -149,7 +149,7 @@ To rename a column, you can use use the ``rename_column`` method on the Schema b
 .. code-block:: python
 
     with schema.table('users') as table:
-        table.rename('from', 'to')
+        table.rename_column('from', 'to')
 
 .. warning::
 
@@ -161,7 +161,7 @@ To rename a column, you can use use the ``rename_column`` method on the Schema b
 
         with schema.table('posts') as table:
             table.drop_foreign('posts_user_id_foreign')
-            table.rename('user_id', 'author_id')
+            table.rename_column('user_id', 'author_id')
             table.foreign('author_id').references('id').on('users')
 
     In future versions, Orator **might** handle this automatically.
@@ -183,7 +183,7 @@ Dropping a column from a database table
 .. code-block:: python
 
     with schema.table('users') as table:
-        table.drop_column
+        table.drop_column('votes')
 
 Dropping multiple columns from a  database table
 ------------------------------------------------
