@@ -29,7 +29,7 @@ Migrations are typically paired with the :ref:`SchemaBuilder` to easily manage y
                 driver: mysql
                 host: localhost
                 database: database
-                username: root
+                user: root
                 password: ''
                 prefix: ''
 
@@ -42,7 +42,7 @@ Migrations are typically paired with the :ref:`SchemaBuilder` to easily manage y
                 'driver': 'mysql',
                 'host': 'localhost',
                 'database': 'database',
-                'username': 'root',
+                'user': 'root',
                 'password': '',
                 'prefix': ''
             }
