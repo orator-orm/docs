@@ -94,8 +94,13 @@ Once you have configured your database connection, you can run queries.
 
 .. warning::
 
-    The following examples use the ``qmark`` syntax for parameter binding. You must adapt it
-    to the syntax of your backend package.
+    The following examples use the ``qmark`` syntax for parameter binding.
+    In previous versions of Orator, you had to adapt it to the parameter style
+    of the underlying backend package. Now, you can set ``use_qmark`` to ``True`` in your
+    configuration to allow the ``qmark`` syntax for all packages, making Orator trully database
+    agnostic.
+
+    This will be the default in the next major version.
 
 
 Running a select query
