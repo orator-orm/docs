@@ -825,7 +825,8 @@ The ``Tag`` model can define a method for each of its relationships:
     subclass.
 
     For example, let's say you want all comments of a user to be ordered by
-    date of creation in descending order:
+    date of creation in descending order and only the ``id`` and ``title`` columns
+    of each comment:
 
     .. code-block:: python
 
@@ -833,7 +834,13 @@ The ``Tag`` model can define a method for each of its relationships:
 
             @has_many
             def comments(self):
-                return Comment.order_by('created_at', 'desc')
+                return (
+                    Comment
+                        .select('id', 'title', 'user_id')
+                        .order_by('created_at', 'desc')
+                )
+
+    *Don't forget to include the column you're joining on*.
 
 
 Querying relations

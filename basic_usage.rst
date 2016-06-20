@@ -92,7 +92,7 @@ Running queries
 
 Once you have configured your database connection, you can run queries.
 
-.. warning::
+.. versionchanged:: 0.9
 
     The following examples use the ``qmark`` syntax for parameter binding.
     In previous versions of Orator, you had to adapt it to the parameter style
