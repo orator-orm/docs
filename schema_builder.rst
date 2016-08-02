@@ -303,8 +303,6 @@ A similar naming convention is used for foreign keys as is used for other indexe
 
 .. note::
 
-    .. versionchanged:: 0.6.3
-
     By default, SQLite will not honor the ``ON DELETE`` and ``ON UPDATE`` statements.
     Orator takes care of the problem by executing the following SQL query:
 

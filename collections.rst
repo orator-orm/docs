@@ -6,9 +6,9 @@ Collections
 Introduction
 ============
 
-The ``Collection`` class provides a fluent, convenient wrapper for working with list or dictionaries of data.
+The ``Collection`` class provides a fluent, convenient wrapper for working with list  of data.
 
-It's behind every ORM queries that return multiple results.
+It's behind every ORM and query builder queries that return multiple results.
 For example, check out the following code:
 
 .. code-block:: python
@@ -42,17 +42,14 @@ You may select any method from this table to see an example of its usage:
 * filter_
 * first_
 * flatten_
-* flip_
 * forget_
 * for_page_
 * get_
 * implode_
 * is_empty_
-* keys_
 * last_
 * map_
 * merge_
-* only_
 * pluck_
 * pop_
 * prepend_
@@ -70,9 +67,7 @@ You may select any method from this table to see an example of its usage:
 * to_json_
 * transform_
 * unique_
-* values_
 * where_
-* without_
 * zip_
 
 
@@ -167,12 +162,6 @@ The ``contains`` method determines whether the collection contains a given item:
 .. code-block:: python
 
     collection = Collection(['foo', 'bar'])
-
-    collection.contains('foo')
-
-    # True
-
-    collection = Collection({'foo': 'bar'})
 
     collection.contains('foo')
 
@@ -352,31 +341,13 @@ The ``flatten`` method flattens a multi-dimensional collection into a single dim
 
 .. code-block:: python
 
-    collection = Collection({'name': 'john', 'products': ['Desk', 'Chair']})
+    collection = Collection([1, 2, [3, 4, 5, {'foo': 'bar'}]])
 
     flattened = collection.flatten()
 
     flattened.all()
 
-    # ['john', 'Desk', 'Chair']
-
-
-.. _flip:
-
-``flip()``
-----------
-
-The ``flip`` method swaps the collection's keys with their corresponding values:
-
-.. code-block:: python
-
-    collection = Collection({'name': 'john', 'votes': 100})
-
-    flipped = collection.flip()
-
-    flipped.all()
-
-    # {'john': 'name', 100: 'votes'}
+    # [1, 2, 3, 4, 5, 'bar']
 
 
 .. _forget:
@@ -388,13 +359,13 @@ The ``forget`` method removes an item from the collection by its key:
 
 .. code-block:: python
 
-    collection = Collection({'name': 'john', 'votes': 100})
+    collection = Collection([1, 2, 3, 4, 5])
 
-    collection.forget('name')
+    collection.forget(1)
 
     collection.all()
 
-    # {'votes': 100}
+    # [1, 3, 4, 5]
 
 .. warning::
 
@@ -432,12 +403,6 @@ The ``get`` method returns the item at a given key. If the key does not exist, `
 
 .. code-block:: python
 
-    collection = Collection({'name': 'john', 'votes': 100})
-
-    collection.get('name')
-
-    # john
-
     collection = Collection([1, 2, 3])
 
     collection.get(3)
@@ -448,9 +413,9 @@ You can optionally pass a default value as the second argument:
 
 .. code-block:: python
 
-    collection = Collection({'name': 'john', 'votes': 100})
+    collection = Collection([1, 2, 3])
 
-    collection.get('foo', 'default-value')
+    collection.get(3, 'default-value')
 
     # default-value
 
@@ -502,27 +467,6 @@ The ``is_empty`` method returns ``True`` if the collection is empty; otherwise, 
     Collection([]).is_empty()
 
     # True
-
-
-.. _keys:
-
-``keys()``
-----------
-
-The ``keys`` method returns all of the collection's keys:
-
-.. code-block:: python
-
-    collection = Collection({
-        'account_id': 1,
-        'product': 'Desk'
-    })
-
-    keys = collection.keys()
-
-    keys.all()
-
-    # ['account_id', 'product']
 
 
 .. _last:
@@ -580,29 +524,7 @@ The callback is free to modify the item and return it, thus forming a new collec
 ``merge()``
 -----------
 
-The merge method merges the given dict or list into the collection:
-
-.. code-block:: python
-
-    collection = Collection({
-        'product_id': 1, 'name': 'Desk'
-    })
-
-    collection.merge({
-        'price': 100,
-        'discount': False
-    })
-
-    collection.all()
-
-    # {
-    #     'product_id': 1,
-    #     'name': 'Desk',
-    #     'price': 100,
-    #     'discount': False
-    # }
-
-For lists collections, the values will be appended to the end of the collection:
+The merge method merges the given list into the collection:
 
 .. code-block:: python
 
@@ -618,31 +540,6 @@ For lists collections, the values will be appended to the end of the collection:
 
     Unlike most other collection methods, ``merge`` does not return a new modified collection;
     it modifies the collection it is called on.
-
-
-.. _only:
-
-``only()``
-----------
-
-The ``only`` method returns the items in the collection with the specified keys:
-
-.. code-block:: python
-
-    collection = Collection({
-        'product_id': 1,
-        'name': 'Desk',
-        'price': 100,
-        'discount': False
-    })
-
-    filtered = collection.only('product_id', 'name')
-
-    filtered.all()
-
-    # {'product_id': 1, 'name': 'Desk'}
-
-For the inverse of ``only``, see the without_ method.
 
 
 .. _pluck:
@@ -671,7 +568,7 @@ You can also specify how you wish the resulting collection to be keyed:
 
     plucked = collection.pluck('name', 'product_id')
 
-    plucked.all()
+    plucked
 
     # {1: 'Desk', 2: 'Chair'}
 
@@ -723,15 +620,13 @@ The ``pull`` method removes and returns an item from the collection by its key:
 
 .. code-block:: python
 
-    collection = Collection({
-        'product_id': 1, 'product': 'Desk'
-    })
+    collection = Collection([1, 2, 3, 4])
 
-    collection.pull('product_id')
+    collection.pull(1)
 
     collection.all()
 
-    # {'product': 'Desk'}
+    # [1, 3, 4]
 
 
 .. _push:
@@ -761,15 +656,13 @@ The ``put`` method sets the given key and value in the collection:
 
 .. code-block:: python
 
-    collection = Collection({
-        'product_id': 1, 'product': 'Desk'
-    })
+    collection = Collection([1, 2, 3, 4])
 
-    collection.put('price', 100)
+    collection.put(1, 5)
 
     collection.all()
 
-    # {'product_id': 1, 'product': 'Desk', 'price': 100}
+    # [1, 5, 3, 4]
 
 .. note::
 
@@ -777,7 +670,7 @@ The ``put`` method sets the given key and value in the collection:
 
     .. code-block:: python
 
-        collection['price'] = 100
+        collection[1] = 5
 
 
 .. _reduce:
@@ -850,16 +743,10 @@ The ``reverse`` method reverses the order of the collection's items:
 ``serialize()``
 ---------------
 
-The ``serialize`` method converts the collection into a ``dict`` or a ``list``.
+The ``serialize`` method converts the collection into a ``list``.
 If the collection's values are :ref:`ORM` models, the models will also be converted to dictionaries:
 
 .. code-block:: python
-
-    collection = Collection({'name': 'Desk', 'product_id': 1})
-
-    collection.serialize()
-
-    # {'name': 'Desk', 'product_id': 1}
 
     collection = Collection([User.find(1)])
 
@@ -989,11 +876,11 @@ The ``to_json`` method converts the collection into JSON:
 
 .. code-block:: python
 
-    collection = Collection({'name': 'Desk', 'price': 200})
+    collection = Collection([{'name': 'Desk', 'price': 200}])
 
     collection.to_json()
 
-    # '{"name": "Desk", "price": 200}'
+    # '[{"name": "Desk", "price": 200}]'
 
 
 .. _transform:
@@ -1075,27 +962,6 @@ You can also pass your own callback to determine item uniqueness:
     # ]
 
 
-.. _values:
-
-``values()``
-------------
-
-The ``values`` method returns all of the collection's values:
-
-.. code-block:: python
-
-    collection = Collection({
-        'account_id': 1,
-        'product': 'Desk'
-    })
-
-    values = collection.values()
-
-    values.all()
-
-    # [1, 'Desk']
-
-
 .. _where:
 
 ``where()``
@@ -1120,31 +986,6 @@ The ``where`` method filters the collection by a given key / value pair:
     #     {'name': 'Chair', 'price': 100},
     #     {'name': 'Door', 'price': 100}
     # ]
-
-
-.. _without:
-
-``without()``
--------------
-
-The ``without`` method returns all items in the collection except for those with the specified keys:
-
-.. code-block:: python
-
-    collection = Collection({
-        'product_id': 1,
-        'name': 'Desk',
-        'price': 100,
-        'discount': False
-    })
-
-    filtered = collection.without('price', 'discount')
-
-    filtered.all()
-
-    # {'product_id': 1, 'name': 'Desk'}
-
-For the inverse of ``without``, see the only_ method.
 
 
 .. _zip:

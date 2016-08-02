@@ -618,18 +618,18 @@ for accessing distant relations via an intermediate relation.
 For example, a ``Country`` model might have many ``Post`` through a ``User`` model.
 The tables for this relationship would look like this:
 
-.. code-block:: yaml
+.. code-block:: text
 
     countries
         id - integer
         name - string
 
-    users:
+    users
         id - integer
         country_id - integer
         name - string
 
-    posts:
+    posts
         id - integer
         user_id - integer
         title - string
@@ -663,8 +663,6 @@ you can pass them as the second and third arguments to the decorator:
 Polymorphic relations
 ---------------------
 
-.. versionadded:: 0.3
-
 Polymorphic relations allow a model to belong to more than one other model, on a single association.
 For example, you might have a ``Photo`` model that belongs to either a ``Staff`` model or an ``Order`` model.
 
@@ -679,11 +677,13 @@ For example, you might have a ``Photo`` model that belongs to either a ``Staff``
         def imageable(self):
             return
 
+
     class Staff(Model):
 
         @morph_many('imageable')
         def photos(self):
             return Photo
+
 
     class Order(Model):
 
@@ -765,8 +765,6 @@ to return when accessing the ``imageable`` relation.
 
 Many To Many polymorphic relations
 ----------------------------------
-
-.. versionadded:: 0.3
 
 Polymorphic Many To Many Relation Table Structure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1556,8 +1554,16 @@ Mutators are declared in a similar fashion:
 Date mutators
 =============
 
-By default, the ORM will convert the ``created_at`` and ``updated_at`` columns to instances of `Arrow <http://arrow.readthedocs.org>`_,
-which eases date and datetime manipulation while behaving pretty much like the native Python date and datetime.
+.. versionchanged:: 0.9
+
+    Orator no longer officially supports `Arrow <http://arrow.readthedocs.org>`_ instances as datetimes.
+
+    It will now only supports `Pendulum <https://pendulum.eustace.io>`_ instances which are a drop-in replacement
+    for the standard ``datetime`` class.
+
+By default, the ORM will convert the ``created_at`` and ``updated_at`` columns
+to instances of `Pendulum <https://pendulum.eustace.io>`_,
+which eases date and datetime manipulation while behaving exactly like the native Python date and datetime.
 
 You can customize which fields are automatically mutated, by either adding them with the ``__dates__`` property or
 by completely overriding the ``get_dates`` method:

@@ -21,6 +21,22 @@ It can be used to perform most database operations in your application, and work
     The underlying DBAPI connections are automatically configured to return dictionaries
     rather than the default tuple representation.
 
+.. versionadded:: 0.9
+
+    The returned rows also supports accessing the column values by attribute:
+
+    .. code-block:: python
+
+        user = db.table('users').first()
+
+        name = user['name']
+        # is equivalent to
+        name = user.name
+
+.. versionchanged:: 0.9
+
+    The returned rows will now be :ref:`Collections` to be more consistent.
+
 
 Selects
 -------
