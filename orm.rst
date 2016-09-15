@@ -1582,7 +1582,7 @@ by completely overriding the ``get_dates`` method:
             return ['created_at']
 
 When a column is considered a date, you can set its value to a UNIX timestamp, a date string ``YYYY-MM-DD``,
-a datetime string, a native ``date`` or ``datetime`` and of course an ``Arrow`` instance.
+a datetime string, a native ``date`` or ``datetime`` and of course an ``Pendulum`` instance.
 
 To completely disable date mutations, simply return an empty list from the ``get_dates`` method.
 

@@ -35,7 +35,7 @@ It can be used to perform most database operations in your application, and work
 
 .. versionchanged:: 0.9
 
-    The returned rows will now be :ref:`Collections` to be more consistent.
+    The returned rows will now be :ref:`Collections` to be more consistent with the behavior of the :ref:`ORM`.
 
 
 Selects
