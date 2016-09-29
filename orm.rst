@@ -252,7 +252,7 @@ To create a new record in the database, simply create a new model instance and c
 .. note::
 
     Your models will probably have auto-incrementing primary keys. However, if you wish to maintain
-    your own primary keys, set the ``__autoincrementing__`` property to ``False``.
+    your own primary keys, set the ``__incrementing__`` property to ``False``.
 
 You can also use the ``create`` method to save a model in a single line, but you will need to specify
 either the ``__fillable__`` or ``__guarded__`` property on the model since all models are protected against
