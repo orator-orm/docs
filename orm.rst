@@ -1673,10 +1673,10 @@ So, for example, a model observer might look like this:
 
     class UserObserver(object):
 
-        def saving(user):
+        def saving(self, user):
             # ...
 
-        def saved(user):
+        def saved(self, user):
             # ...
 
 You can register an observer instance using the ``observe`` method:
