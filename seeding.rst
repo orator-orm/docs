@@ -163,10 +163,10 @@ However, you can use the ``--seeder`` option to specify a specific seeder class 
 
     orator db:seed --seeder users_table_seeder
 
-You can also seed your database using the ``migrations:refresh`` command,
+You can also seed your database using the ``migrate:refresh`` command,
 which will also rollback and re-run all of your migrations.
 This command is useful for completely re-building your database:
 
 .. code-block:: text
 
-    orator migrations:refresh --seed
+    orator migrate:refresh --seed
