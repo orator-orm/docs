@@ -1758,7 +1758,7 @@ Once you have created the accessor, just add the value to the ``__appends__`` pr
 
     class User(Model):
 
-        __append__ = ['is_admin']
+        __appends__ = ['is_admin']
 
         @accessor
         def is_admin(self):
