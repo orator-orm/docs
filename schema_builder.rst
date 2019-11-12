@@ -111,6 +111,7 @@ Command                                                   Description
 :python:`.nullable()`                                     Designate that the column allows NULL values
 :python:`.default(value)`                                 Declare a default value for a column
 :python:`.unsigned()`                                     Set INTEGER to UNSIGNED
+:python:`.unique()`                                       Designate that the column contains unique values
 ========================================================  =================================================
 
 
